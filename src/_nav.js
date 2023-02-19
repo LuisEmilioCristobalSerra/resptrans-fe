@@ -9,4 +9,17 @@ export default [
       text: 'NEW',
     },
   },
+  {
+    component: 'CNavGroup',
+    name: 'Empleados',
+    to: '/buttons',
+    icon: 'cilPeople',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'Reporte',
+        to: '/employees',
+      },
+    ],
+  },
 ]
