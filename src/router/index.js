@@ -6,7 +6,7 @@ import DefaultLayout from '@/layouts/DefaultLayout'
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'Dashboard',
     component: DefaultLayout,
     redirect: '/dashboard',
     children: [
@@ -19,17 +19,24 @@ const routes = [
         component: () =>
           import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
       },
+    ],
+  },
+  {
+    path: '/employees',
+    name: 'Empleados',
+    component: DefaultLayout,
+    children: [
       {
         path: '/employees',
-        name: 'employees-report-route',
+        name: 'Reporte',
         component: () => import('@/views/employees/EmployeeReport.vue'),
-        children: [
-          {
-            path: '/base/accordion',
-            name: 'Accordion',
-            component: () => import('@/views/employees/EmployeeReport.vue'),
-          },
-        ],
+        // children: [
+        //   {
+        //     path: '/base/accordion',
+        //     name: 'Accordion',
+        //     component: () => import('@/views/employees/EmployeeReport.vue'),
+        //   },
+        // ],
       },
     ],
   },

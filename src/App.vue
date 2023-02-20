@@ -5,4 +5,7 @@
 <style lang="scss">
 // Import Main styles for this application
 @import 'styles/style';
+.btn:hover {
+  color: #fff;
+}
 </style>
