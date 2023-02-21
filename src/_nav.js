@@ -12,7 +12,6 @@ export default [
   {
     component: 'CNavGroup',
     name: 'Empleados',
-    to: '/buttons',
     icon: 'cilPeople',
     items: [
       {
@@ -25,7 +24,6 @@ export default [
   {
     component: 'CNavGroup',
     name: 'Sucursales',
-    to: '/buttons',
     icon: 'cilPeople',
     items: [
       {

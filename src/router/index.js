@@ -13,49 +13,23 @@ const routes = [
       {
         path: '/dashboard',
         name: 'Dashboard',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
         component: () =>
-          import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue'),
+          import('@/views/Dashboard.vue'),
       },
-    ],
-  },
-  {
-    path: '/employees',
-    name: 'Empleados',
-    component: DefaultLayout,
-    children: [
       {
         path: '/employees',
-        name: 'Reporte',
+        name: 'Empleados',
         component: () => import('@/views/employees/EmployeeReport.vue'),
-        // children: [
-        //   {
-        //     path: '/base/accordion',
-        //     name: 'Accordion',
-        //     component: () => import('@/views/employees/EmployeeReport.vue'),
-        //   },
-        // ],
       },
-    ],
-  },
-  {
-    path: '/subsidiaries',
-    name: 'Sucursales',
-    component: DefaultLayout,
-    children: [
       {
         path: '/subsidiaries',
-        name: 'Reporte',
+        name: 'Sucursales',
         component: () => import('@/views/subsidiaries/SubsidiaryReport.vue'),
-        // children: [
-        //   {
-        //     path: '/base/accordion',
-        //     name: 'Accordion',
-        //     component: () => import('@/views/employees/EmployeeReport.vue'),
-        //   },
-        // ],
       },
     ],
   },

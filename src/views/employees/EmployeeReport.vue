@@ -126,7 +126,10 @@ const openInformation = async (rowId) => {
   modalIsForStore.value = false
   formIsLoading.value = true
   const response = await getInformation(rowId)
-  model.value = response
+  model.value = {
+    ...response,
+    subsidiary_ids: response.subsidiaries?.map((subsidiary) => subsidiary.id),
+  }
   formIsLoading.value = false
   modalIsVisible.value = true
   isLoadingTable.value = false

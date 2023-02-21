@@ -2,6 +2,9 @@
 .m-auto {
   margin: auto;
 }
+:deep(.el-select) {
+  width: 100%;
+}
 </style>
 <template>
   <el-form
@@ -43,6 +46,24 @@
           <el-input v-model="formData.phone" type="text" />
         </el-form-item>
       </div>
+      <div class="fv-row mb-7">
+        <label class="required fs-6 fw-semobold mb-2">Sucursales</label>
+        <el-form-item width="100%" prop="phone">
+          <el-select
+            v-model="formData.subsidiary_ids"
+            multiple
+            filterable
+            placeholder="Seleccione las sucursales"
+          >
+            <el-option
+              v-for="subsidiary in subsidiaries"
+              :key="subsidiary.id"
+              :value="subsidiary.id"
+              :label="subsidiary.name"
+            />
+          </el-select>
+        </el-form-item>
+      </div>
     </div>
     <div class="modal-footer flex-center">
       <button @click="$emit('cancel')" type="button" class="btn btn-light me-3">
@@ -54,6 +75,7 @@
 </template>
 
 <script setup>
+import Subsidiary from '@/repositories/Subsidiary'
 import {
   defineComponent,
   ref,
@@ -111,18 +133,21 @@ const rules = ref({
 })
 const disabled = ref(false)
 const isLoading = ref(false)
+const subsidiaries = ref([])
 
 onMounted(async () => {
   isLoading.value = true
   formData.value = JSON.parse(JSON.stringify(props.data))
+  subsidiaries.value = await getSubsidiaries()
   isLoading.value = false
 })
-watch(
-  () => props.storeMode,
-  (newData) => {
-    formData.value = {}
-  },
-)
+
+const getSubsidiaries = async () => {
+  const {
+    data: { data },
+  } = await Subsidiary.all()
+  return data
+}
 
 const modelChanged = () => {
   formRef.value?.validate((valid) => {
