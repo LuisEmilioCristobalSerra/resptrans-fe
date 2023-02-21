@@ -68,10 +68,8 @@ const AppSidebarNav = defineComponent({
           },
           {
             togglerContent: () => [
-              h(resolveComponent('CIcon'), {
-                customClassName: 'nav-icon',
-                name: item.icon,
-              }),
+              h('div', { class: "d-flex w-10px", innerHTML: `<i class="fa-solid ps-2 ${item.icon}"></i>`, style: { width: "40px" } }),
+              // h('i', { class: `` }),
               item.name,
             ],
             default: () => item.items.map((child) => renderItem(child)),
@@ -81,51 +79,51 @@ const AppSidebarNav = defineComponent({
 
       return item.to
         ? h(
-            RouterLink,
-            {
-              to: item.to,
-              custom: true,
-            },
-            {
-              default: (props) =>
-                h(
-                  resolveComponent(item.component),
-                  {
-                    active: props.isActive,
-                    href: props.href,
-                    onClick: () => props.navigate(),
-                  },
-                  {
-                    default: () => [
-                      item.icon &&
-                        h(resolveComponent('CIcon'), {
-                          customClassName: 'nav-icon',
-                          name: item.icon,
-                        }),
-                      item.name,
-                      item.badge &&
-                        h(
-                          CBadge,
-                          {
-                            class: 'ms-auto',
-                            color: item.badge.color,
-                          },
-                          {
-                            default: () => item.badge.text,
-                          },
-                        ),
-                    ],
-                  },
-                ),
-            },
-          )
+          RouterLink,
+          {
+            to: item.to,
+            custom: true,
+          },
+          {
+            default: (props) =>
+              h(
+                resolveComponent(item.component),
+                {
+                  active: props.isActive,
+                  href: props.href,
+                  onClick: () => props.navigate(),
+                },
+                {
+                  default: () => [
+                    item.icon &&
+                    h(resolveComponent('CIcon'), {
+                      customClassName: 'nav-icon',
+                      name: item.icon,
+                    }),
+                    item.name,
+                    item.badge &&
+                    h(
+                      CBadge,
+                      {
+                        class: 'ms-auto',
+                        color: item.badge.color,
+                      },
+                      {
+                        default: () => item.badge.text,
+                      },
+                    ),
+                  ],
+                },
+              ),
+          },
+        )
         : h(
-            resolveComponent(item.component),
-            {},
-            {
-              default: () => item.name,
-            },
-          )
+          resolveComponent(item.component),
+          {},
+          {
+            default: () => item.name,
+          },
+        )
     }
 
     return () =>

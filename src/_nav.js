@@ -4,15 +4,11 @@ export default [
     name: 'Dashboard',
     to: '/dashboard',
     icon: 'cil-speedometer',
-    badge: {
-      color: 'primary',
-      text: 'NEW',
-    },
   },
   {
     component: 'CNavGroup',
     name: 'Empleados',
-    icon: 'cilPeople',
+    icon: 'fa-people-line',
     items: [
       {
         component: 'CNavItem',
@@ -24,7 +20,7 @@ export default [
   {
     component: 'CNavGroup',
     name: 'Sucursales',
-    icon: 'cilPeople',
+    icon: 'fa-building',
     items: [
       {
         component: 'CNavItem',
@@ -36,7 +32,7 @@ export default [
   {
     component: 'CNavGroup',
     name: 'Artículos',
-    icon: 'cilPeople',
+    icon: 'fa-desktop',
     items: [
       {
         component: 'CNavItem',
