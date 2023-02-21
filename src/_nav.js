@@ -33,4 +33,16 @@ export default [
       },
     ],
   },
+  {
+    component: 'CNavGroup',
+    name: 'Artículos',
+    icon: 'cilPeople',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'Reporte',
+        to: '/items',
+      },
+    ],
+  },
 ]

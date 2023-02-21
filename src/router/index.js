@@ -31,6 +31,11 @@ const routes = [
         name: 'Sucursales',
         component: () => import('@/views/subsidiaries/SubsidiaryReport.vue'),
       },
+      {
+        path: '/items',
+        name: 'Artículos',
+        component: () => import('@/views/Item/ItemReport.vue'),
+      },
     ],
   },
   {
