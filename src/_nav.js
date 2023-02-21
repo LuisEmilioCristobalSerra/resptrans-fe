@@ -22,4 +22,17 @@ export default [
       },
     ],
   },
+  {
+    component: 'CNavGroup',
+    name: 'Sucursales',
+    to: '/buttons',
+    icon: 'cilPeople',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'Reporte',
+        to: '/subsidiaries',
+      },
+    ],
+  },
 ]

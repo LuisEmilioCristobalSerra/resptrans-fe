@@ -41,6 +41,25 @@ const routes = [
     ],
   },
   {
+    path: '/subsidiaries',
+    name: 'Sucursales',
+    component: DefaultLayout,
+    children: [
+      {
+        path: '/subsidiaries',
+        name: 'Reporte',
+        component: () => import('@/views/subsidiaries/SubsidiaryReport.vue'),
+        // children: [
+        //   {
+        //     path: '/base/accordion',
+        //     name: 'Accordion',
+        //     component: () => import('@/views/employees/EmployeeReport.vue'),
+        //   },
+        // ],
+      },
+    ],
+  },
+  {
     path: '/pages',
     redirect: '/pages/404',
     name: 'Pages',
