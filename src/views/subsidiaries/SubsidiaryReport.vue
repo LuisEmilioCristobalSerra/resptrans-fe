@@ -39,6 +39,9 @@
                   <el-dropdown-item @click="openInformation(row.id)"
                     >Editar</el-dropdown-item
                   >
+                  <el-dropdown-item @click="goToItemsRoute(row.id)"
+                    >Asignar artículos</el-dropdown-item
+                  >
                   <el-dropdown-item @click="deleteModel(row.id)"
                     >Eliminar</el-dropdown-item
                   >
@@ -71,6 +74,7 @@ import { computed, onMounted, ref } from 'vue'
 import Subsidiary from '@/repositories/Subsidiary'
 import InformationForm from '@/components/Subsidiaries/InformationForm.vue'
 import { ElNotification } from 'element-plus'
+import { useRouter } from 'vue-router'
 
 const model = ref({})
 const isLoadingTable = ref(false)
@@ -81,6 +85,7 @@ const filterParams = ref('')
 const table = ref({
   data: null,
 })
+const router = useRouter()
 
 onMounted(async () => {
   await renderTable()
@@ -193,4 +198,8 @@ const displayedData = computed(() => {
     name.toLowerCase().includes(filterParams.value.toLowerCase()),
   )
 })
+
+const goToItemsRoute = (subsidiaryId) => {
+  router.push(`subsidiaries/${subsidiaryId}/items`)
+}
 </script>

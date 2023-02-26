@@ -22,4 +22,16 @@ const deleteModel = async (id) => {
     return BackendService.delete(`${url}/${id}`)
 }
 
-export default { all, create, find, update, deleteModel }
+const inventory = (id, params) => {
+    return BackendService.get(`${url}/${id}/inventory`, { params })
+}
+
+const addItemsToInventory = (id, params) => {
+    return BackendService.post(`${url}/${id}/inventory`, params)
+}
+
+const removeItem = (id, itemId) => {
+    return BackendService.delete(`${url}/${id}/inventory/${itemId}`)
+}
+
+export default { all, create, find, update, deleteModel, inventory, addItemsToInventory, removeItem }

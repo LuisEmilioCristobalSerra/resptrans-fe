@@ -29,7 +29,23 @@ const routes = [
       {
         path: '/subsidiaries',
         name: 'Sucursales',
-        component: () => import('@/views/subsidiaries/SubsidiaryReport.vue'),
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        children: [
+          {
+            path: '',
+            name: 'Index',
+            component: () => import('@/views/subsidiaries/SubsidiaryReport.vue'),
+          },
+          {
+            path: ':id/items',
+            name: 'Artículos registrados',
+            component: () => import('@/views/subsidiaries/InventoryIndex.vue'),
+          },
+        ],
       },
       {
         path: '/items',
