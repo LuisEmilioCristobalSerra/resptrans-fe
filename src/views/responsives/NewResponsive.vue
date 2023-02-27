@@ -1,4 +1,28 @@
 <template>
+  <vue3-html2pdf
+    v-if="pdfParams"
+    :show-layout="false"
+    :float-layout="true"
+    :enable-download="true"
+    :preview-modal="true"
+    :paginate-elements-by-height="1400"
+    :pdf-quality="2"
+    :manual-pagination="false"
+    :filename="`responsiva-${employeeSelected?.name}`"
+    pdf-format="letter"
+    pdf-orientation="portrait"
+    pdf-content-width="100%"
+    ref="html2Pdf"
+  >
+    <template v-slot:pdf-content>
+      <document-component
+        :user="pdfParams.user"
+        :employee="pdfParams.employee"
+        :subsidiary="pdfParams.subsidiary"
+        :items="pdfParams.items"
+      ></document-component>
+    </template>
+  </vue3-html2pdf>
   <div class="card mb-2 border-left-primary shadow">
     <div class="card-body">
       <div class="w-100 card-title">Información del empleado</div>
@@ -18,6 +42,7 @@
             :key="item.id"
             :label="`${item.name} ${item.paternal_surname} ${item.maternal_surname}`"
             :value="item.id"
+            @click="employeeSelected = item"
           />
         </el-select>
         <el-select
@@ -111,7 +136,10 @@ import Subsidiary from '@/repositories/Subsidiary'
 import { Edit, Picture, Upload } from '@element-plus/icons-vue'
 import { onMounted, ref } from 'vue'
 import { ElNotification } from 'element-plus'
+import Vue3Html2pdf from 'vue3-html2pdf'
+import DocumentComponent from '@/components/Docs/DocumentComponent.vue'
 
+const html2Pdf = ref(null)
 const table = ref({
   data: null,
   isLoading: false,
@@ -136,6 +164,9 @@ const selects = ref({
     isLoading: false,
   },
 })
+const employeeSelected = ref({})
+const subsidiarySelected = ref({})
+const pdfParams = ref({})
 
 const filterEmployees = async (search) => {
   selects.value.employeeSelect.isLoading = true
@@ -184,6 +215,7 @@ const searchItems = async (params) => {
 
 const setSubsidiaryForEmployee = async (subsidiaryDetails) => {
   responsiveDetails.value.employee_subsidiary_id = subsidiaryDetails.pivot.id
+  subsidiarySelected.value = subsidiaryDetails
   await filterItems()
 }
 
@@ -232,6 +264,7 @@ const createResponsive = async () => {
     }),
   }
   await Employee.createResponsive(responsiveDetails.value.employee_id, params)
+  generatePdf()
   success('Responsiva generada correctamente')
 }
 
@@ -240,5 +273,50 @@ const success = (message) => {
     title: message,
     type: 'success',
   })
+}
+
+const generatePdf = () => {
+  pdfParams.value = {
+    user: {
+      name: 'Juan Guillen Martinez',
+    },
+    employee: employeeSelected.value,
+    subsidiary: subsidiarySelected.value,
+    items: table.value.data.map((row) => {
+      return {
+        ...row.item,
+        quantity: row.quantity,
+      }
+    }),
+  }
+  html2Pdf.value.generatePdf()
+  resetFields()
+}
+
+const resetFields = () => {
+  table.value = {
+    data: null,
+    isLoading: false,
+  }
+  responsiveDetails.value = {
+    employee_id: null,
+    employee_subsidiary_id: null,
+    subsidiary_id: null,
+    items: [],
+  }
+  selects.value = {
+    employeeSelect: {
+      options: [],
+      isLoading: false,
+    },
+    subsidiaries: {
+      options: [],
+      isLoading: false,
+    },
+    items: {
+      options: [],
+      isLoading: false,
+    },
+  }
 }
 </script>
