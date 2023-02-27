@@ -15,6 +15,7 @@ instance.interceptors.response.use(function (response) {
         title: "Ha ocurrido un error",
         message: error.response?.data?.message,
         type: 'error',
+        duration: 0,
     })
     return Promise.reject(error)
 })

@@ -2,8 +2,8 @@ import BackendService from "@/services/BackendService"
 
 const url = "/employees"
 
-const all = async () => {
-    return BackendService.get(url)
+const all = async (params) => {
+    return BackendService.get(url, { params })
 }
 
 const create = async (params) => {
@@ -22,4 +22,12 @@ const deleteModel = async (id) => {
     return BackendService.delete(`${url}/${id}`)
 }
 
-export default { all, create, find, update, deleteModel }
+const subsidiaries = async (id, params) => {
+    return BackendService.get(`${url}/${id}/subsidiaries`, { params })
+}
+
+const createResponsive = async (id, params) => {
+    return BackendService.post(`${url}/${id}/responsives`, params)
+}
+
+export default { all, create, find, update, deleteModel, subsidiaries, createResponsive }

@@ -1,9 +1,9 @@
 import BackendService from "@/services/BackendService"
 
-const url = "/subsidiaries"
+const url = "/responsives"
 
-const all = async (params) => {
-    return BackendService.get(url, { params })
+const all = async () => {
+    return BackendService.get(url)
 }
 
 const create = async (params) => {

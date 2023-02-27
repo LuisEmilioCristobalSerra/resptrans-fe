@@ -41,4 +41,16 @@ export default [
       },
     ],
   },
+  {
+    component: 'CNavGroup',
+    name: 'Responsivas',
+    icon: 'fa-desktop',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'Reporte',
+        to: '/responsives',
+      },
+    ],
+  },
 ]

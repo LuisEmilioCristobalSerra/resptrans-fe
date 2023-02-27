@@ -37,13 +37,34 @@ const routes = [
         children: [
           {
             path: '',
-            name: 'Index',
+            name: 'Sucursales',
             component: () => import('@/views/subsidiaries/SubsidiaryReport.vue'),
           },
           {
             path: ':id/items',
             name: 'Artículos registrados',
             component: () => import('@/views/subsidiaries/InventoryIndex.vue'),
+          },
+        ],
+      },
+      {
+        path: '/responsives',
+        name: 'Responsivas',
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        children: [
+          {
+            path: '',
+            name: 'Responsivas',
+            component: () => import('@/views/responsives/ResponsiveIndex.vue'),
+          },
+          {
+            path: 'new',
+            name: 'Nueva responsiva',
+            component: () => import('@/views/responsives/NewResponsive.vue'),
           },
         ],
       },

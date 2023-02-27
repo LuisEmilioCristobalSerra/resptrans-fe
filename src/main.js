@@ -9,6 +9,7 @@ import { iconsSet as icons } from '@/assets/icons'
 import DocsExample from '@/components/DocsExample'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
+import '@/assets/css/style.css'
 
 const app = createApp(App)
 app.use(store)
