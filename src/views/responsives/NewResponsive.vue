@@ -133,8 +133,7 @@
 <script setup>
 import Employee from '@/repositories/Employee'
 import Subsidiary from '@/repositories/Subsidiary'
-import { Edit, Picture, Upload } from '@element-plus/icons-vue'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
 import { ElNotification } from 'element-plus'
 import Vue3Html2pdf from 'vue3-html2pdf'
 import DocumentComponent from '@/components/Docs/DocumentComponent.vue'

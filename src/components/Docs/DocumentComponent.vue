@@ -91,6 +91,84 @@
         </tbody>
       </table>
     </main>
+    <div class="html2pdf__page-break" />
+    <main
+      class="border-left-success shadow ps-4 mt-5 text-break pe-4 text-wrap"
+    >
+      <div class="text-end mt-5 mb-5">
+        <span>Villahermosa Tab, {{ dayjs().format('DD/MM/YYYY h:mm A') }}</span>
+      </div>
+      <div class="text-center mb-5">
+        <h5 class="fw-bold">CARTA RESPONSIVA</h5>
+      </div>
+      <div>
+        <span
+          >Por medio de la presente
+          <span class="fw-bold text-uppercase">{{
+            `${props.employee?.name} ${props.employee?.paternal_surname} ${props.employee?.maternal_surname}`
+          }}</span>
+          declara recibir como herramienta de trabajo:
+        </span>
+        <div class="mt-3">
+          <ul>
+            <li v-for="item in props.items" :key="item">
+              {{ item.name }} {{ item.description }}, COD: {{ item.code }}, SN:
+              {{ item.serial }}
+            </li>
+          </ul>
+        </div>
+        <div style="text-align: justify" class="mb-2">
+          Por lo cual firma de conformidad, comprometiéndose a mantenerlo en el
+          estado en el que lo recibe, cuidando de dicho material como si el
+          mismo fuera de su propiedad, en el entendido de que en caso de que el
+          mismo sufra cualquier daño ocasionado por su dolo o negligencia se
+          hará responsable de la reparación del mismo.
+        </div>
+        <div style="text-align: justify" class="mb-2">
+          En caso de que, por causas inherentes al uso y desgaste normales del
+          equipo, el mismo requiera cualquier reparación, el que suscribe
+          notificará tal circunstancia a la empresa para que la misma le indique
+          las condiciones en las que las reparaciones o trabajo de mantenimiento
+          sobre el mismo habrán de realizarse.
+        </div>
+        <div style="text-align: justify" class="mb-2">
+          El suscriptor de este documento reconoce que el equipo que se le
+          entrega sólo podrá ser utilizado para cumplir con las tareas que le
+          encomiende la empresa, dentro del horario de trabajo y las
+          instalaciones asignadas; y que no podrá hacer uso del mismo para
+          cuestiones de carácter personal. Asimismo, se compromete a emplear el
+          equipo únicamente de acuerdo con las condiciones y especificaciones
+          que para dichos efectos haga de su conocimiento la empresa,
+          obligándose a no modificarlo ni en el hardware ni en el software, es
+          decir no agregar ni suprimir ningún programa o información de los que
+          se encuentren cargados originalmente sin el expreso consentimiento por
+          escrito de la empresa.
+        </div>
+        <div style="text-align: justify" class="mb-2">
+          El que suscribe reconoce que los derechos sobre el equipo objeto de la
+          presente corresponden exclusivamente a
+          <span class="fw-bold">Prefabricados de Palenque S.A. De C.V</span> en
+          términos del contrato que tiene celebrado con el proveedor del mismo
+          por lo que a la simple solicitud de la empresa se obliga a devolver el
+          equipo que se le entrega a la firma del presente y, en todo caso, al
+          terminar su relación laboral con la compañía dejará de utilizar el
+          mismo haciendo entrega de él al personal que se le indique en el mismo
+          estado en que lo haya recibido, salvo el deterioro debido al uso
+          normal del equipo.
+        </div>
+        <div class="mt-5 pt-5 text-center">
+          <div class="fw-bold">
+            ________________________________________________________
+          </div>
+          <p class="fw-bold">
+            {{
+              `${props.employee?.name} ${props.employee?.paternal_surname} ${props.employee?.maternal_surname}`
+            }}
+          </p>
+          <div class="fw-bold">Nombre y firma de conformidad.</div>
+        </div>
+      </div>
+    </main>
   </body>
 </template>
 
