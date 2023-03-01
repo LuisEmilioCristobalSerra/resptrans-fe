@@ -115,6 +115,9 @@
             <span @click="removeItem(row.id)" class="btn btn-outline-danger"
               ><i class="fa-solid fa-trash"></i
             ></span>
+            <span @click="openDetailsForm(row)" class="btn btn-outline-success"
+              >Artículos</span
+            >
           </template>
         </el-table-column>
       </el-table>
@@ -129,6 +132,18 @@
       </div>
     </div>
   </div>
+  <el-dialog
+    v-model="modalItemsIsVisible"
+    title="Información de responsiva"
+    width="40%"
+    destroy-on-close
+    center
+  >
+    <item-details
+      :quantity="itemSelected.quantity"
+      @success="setItemDetails"
+    ></item-details>
+  </el-dialog>
 </template>
 <script setup>
 import Employee from '@/repositories/Employee'
@@ -137,6 +152,7 @@ import { ref } from 'vue'
 import { ElNotification } from 'element-plus'
 import Vue3Html2pdf from 'vue3-html2pdf'
 import DocumentComponent from '@/components/Docs/DocumentComponent.vue'
+import ItemDetails from '@/components/Responsive/ItemDetails.vue'
 
 const html2Pdf = ref(null)
 const table = ref({
@@ -166,6 +182,8 @@ const selects = ref({
 const employeeSelected = ref({})
 const subsidiarySelected = ref({})
 const pdfParams = ref({})
+const modalItemsIsVisible = ref(false)
+const itemSelected = ref({})
 
 const filterEmployees = async (search) => {
   selects.value.employeeSelect.isLoading = true
@@ -259,6 +277,7 @@ const createResponsive = async () => {
       return {
         quantity: item.quantity,
         inventory_item_id: item.id,
+        items: item.items,
       }
     }),
   }
@@ -282,8 +301,10 @@ const generatePdf = () => {
     employee: employeeSelected.value,
     subsidiary: subsidiarySelected.value,
     items: table.value.data.map((row) => {
+      console.log(row)
       return {
         ...row.item,
+        items: row.items,
         quantity: row.quantity,
       }
     }),
@@ -317,5 +338,15 @@ const resetFields = () => {
       isLoading: false,
     },
   }
+}
+
+const openDetailsForm = (item) => {
+  itemSelected.value = item
+  modalItemsIsVisible.value = true
+}
+
+const setItemDetails = (details) => {
+  itemSelected.value.items = details
+  modalItemsIsVisible.value = false
 }
 </script>

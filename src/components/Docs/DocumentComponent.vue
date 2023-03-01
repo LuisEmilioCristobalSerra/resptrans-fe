@@ -13,10 +13,10 @@
               fill="black"
             ></circle>
           </svg>
-          <h3>RespTrans</h3>
+          <h3>RespTrans FYMSA</h3>
         </div>
         <div class="text-end">
-          <p>{{ dayjs() }}</p>
+          <p>{{ dayjs().format('DD/MM/YYYY') }}</p>
         </div>
       </div>
       <hr />
@@ -39,7 +39,7 @@
         </div>
         <div class="col text-end">
           <h4>Sucursal</h4>
-          <p>
+          <p class="mb-2">
             <b>{{ props.subsidiary?.name }}</b>
           </p>
           <h5>Generado por</h5>
@@ -55,9 +55,9 @@
         <thead>
           <tr>
             <th>Articulo</th>
-            <th>Serie</th>
-            <th>OC</th>
-            <th>Fecha de compra</th>
+            <th style="max-width: 150px; overflow: hidden; margin-right: 12px">Serie</th>
+            <th style="max-width: 150px; overflow: hidden; margin-right: 12px">Código</th>
+            <th class="text-center">Fecha de registro</th>
             <th>Cantidad</th>
           </tr>
         </thead>
@@ -68,25 +68,18 @@
               <br />
               {{ item.description }}
             </td>
-            <td>{{ item.serial }}</td>
-            <td>{{ item.oc }}</td>
-            <td>{{ item.created_at }}</td>
-            <td>{{ item.quantity }}</td>
-          </tr>
-        </tbody>
-      </table>
-      <table class="summary">
-        <tbody>
-          <tr class="total">
-            <th>Total</th>
-            <td>
-              {{
-                props.items?.reduce(
-                  (accumulator, current) =>
-                    accumulator.quantity + current.quantity,
-                )
-              }}
+            <td style="max-width: 150px; overflow: hidden; margin-right: 12px">
+              <span class="me-1" v-for="item in item.items" :key="item.id">{{
+                item.serial
+              }}</span>
             </td>
+            <td style="max-width: 150px; overflow: hidden; margin-right: 12px">
+              <span class="me-1" v-for="item in item.items" :key="item.id">{{
+                item.code
+              }}</span>
+            </td>
+            <td class="text-center">{{ dayjs(item.created_at).format('DD/MM/YYYY') }}</td>
+            <td>{{ item.quantity }}</td>
           </tr>
         </tbody>
       </table>
@@ -112,8 +105,10 @@
         <div class="mt-3">
           <ul>
             <li v-for="item in props.items" :key="item">
-              {{ item.name }} {{ item.description }}, COD: {{ item.code }}, SN:
-              {{ item.serial }}
+              <span>{{ item.name }} {{ item.description }}</span>
+              <span v-for="item in item.items" :key="item.id"
+                > <span class="fw-bold fst-italic"> COD:</span> {{ item.code }}, <span class="fw-bold">SN:</span> {{ item.serial }}. </span
+              >
             </li>
           </ul>
         </div>
