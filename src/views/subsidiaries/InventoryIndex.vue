@@ -35,9 +35,7 @@
         style="width: 100%"
       >
         <el-table-column label="Producto" prop="item.name" />
-        <el-table-column label="Código" prop="item.code" />
-        <el-table-column label="# Serie" prop="item.serial" />
-        <el-table-column label="OC" prop="item.oc" />
+        <el-table-column label="Descripción" prop="item.description" />
         <el-table-column label="Registrado el" prop="created_at" />
         <el-table-column align="right">
           <template #default="{ row }">

@@ -29,30 +29,6 @@
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
-        <label class="required fs-6 fw-semobold mb-2">Código de barras</label>
-        <el-form-item prop="code">
-          <el-input v-model="formData.code" type="text" />
-        </el-form-item>
-      </div>
-      <div class="fv-row mb-7">
-        <label class="required fs-6 fw-semobold mb-2">Numero de serie</label>
-        <el-form-item prop="serial">
-          <el-input v-model="formData.serial" type="text" />
-        </el-form-item>
-      </div>
-      <div class="fv-row mb-7">
-        <label class="required fs-6 fw-semobold mb-2">Numero de factura</label>
-        <el-form-item prop="invoice">
-          <el-input v-model="formData.invoice" type="text" />
-        </el-form-item>
-      </div>
-      <div class="fv-row mb-7">
-        <label class="required fs-6 fw-semobold mb-2">OC</label>
-        <el-form-item prop="oc">
-          <el-input v-model="formData.oc" type="text" />
-        </el-form-item>
-      </div>
-      <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Comprado el</label>
         <el-form-item prop="bought_at">
           <el-date-picker
@@ -93,38 +69,10 @@ const rules = ref({
       trigger: '-',
     },
   ],
-  street: [
+  description: [
     {
       required: true,
-      message: 'La calle es requerida.',
-      trigger: '-',
-    },
-  ],
-  interior: [
-    {
-      required: true,
-      message: 'El numero interior es requerido.',
-      trigger: '-',
-    },
-  ],
-  exterior: [
-    {
-      required: true,
-      message: 'El numero exterior es requerido.',
-      trigger: '-',
-    },
-  ],
-  district: [
-    {
-      required: true,
-      message: 'La ciudad es requerida.',
-      trigger: '-',
-    },
-  ],
-  postal_code: [
-    {
-      required: true,
-      message: 'El código postal es requerido.',
+      message: 'El nombre es requerido.',
       trigger: '-',
     },
   ],

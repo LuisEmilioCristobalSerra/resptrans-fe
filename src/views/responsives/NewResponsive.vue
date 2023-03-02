@@ -106,18 +106,20 @@
           </template>
         </el-table-column>
         <el-table-column label="Producto" prop="item.name" />
-        <el-table-column label="Código" prop="item.code" />
-        <el-table-column label="# Serie" prop="item.serial" />
-        <el-table-column label="OC" prop="item.oc" />
+        <el-table-column label="Descripción" prop="item.description" />
         <el-table-column label="Registrado el" prop="created_at" />
-        <el-table-column align="right">
+        <el-table-column label="Acciones" align="right">
           <template #default="{ row }">
-            <span @click="removeItem(row.id)" class="btn btn-outline-danger"
-              ><i class="fa-solid fa-trash"></i
-            ></span>
-            <span @click="openDetailsForm(row)" class="btn btn-outline-success"
-              >Artículos</span
-            >
+            <div class="d-flex gap-2 justify-content-end">
+              <span @click="removeItem(row.id)" class="btn btn-outline-danger"
+                ><i class="fa-solid fa-trash"></i
+              ></span>
+              <span
+                @click="openDetailsForm(row)"
+                class="btn btn-outline-success"
+                >Artículos</span
+              >
+            </div>
           </template>
         </el-table-column>
       </el-table>

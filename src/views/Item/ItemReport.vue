@@ -8,10 +8,6 @@
       >
         <el-table-column label="Nombre" prop="name" />
         <el-table-column label="Descripción" prop="description" />
-        <el-table-column label="Código de barras" prop="code" />
-        <el-table-column label="Numero de serie" prop="serial" />
-        <el-table-column label="Numero de factura" prop="invoice" />
-        <el-table-column label="oc" prop="oc" />
         <el-table-column label="bought_at" prop="bought_at" />
         <el-table-column align="right">
           <template #header>
