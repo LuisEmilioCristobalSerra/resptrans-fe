@@ -53,4 +53,16 @@ export default [
       },
     ],
   },
+  {
+    component: 'CNavGroup',
+    name: 'Transferencias',
+    icon: 'fa-desktop',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'Reporte',
+        to: '/transfers',
+      },
+    ],
+  },
 ]

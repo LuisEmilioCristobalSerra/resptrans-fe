@@ -69,6 +69,27 @@ const routes = [
         ],
       },
       {
+        path: '/transfers',
+        name: 'Transferencias',
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        children: [
+          {
+            path: '',
+            name: 'Transferencias',
+            component: () => import('@/views/transfers/TransferIndex.vue'),
+          },
+          {
+            path: 'new',
+            name: 'Nueva transferencia',
+            component: () => import('@/views/transfers/NewTransfer.vue'),
+          },
+        ],
+      },
+      {
         path: '/items',
         name: 'Artículos',
         component: () => import('@/views/Item/ItemReport.vue'),
