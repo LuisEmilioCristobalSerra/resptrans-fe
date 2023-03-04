@@ -9,15 +9,15 @@
       >
         <el-table-column label="Folio" prop="id" />
         <el-table-column label="Generado por" prop="generated_by.name" />
-        <el-table-column label="Articulos">
+        <el-table-column label="Artículos">
           <template #default="{ row }">
             <el-tag v-for="item in row.details" :key="item.id">{{
               item.name
             }}</el-tag>
           </template>
         </el-table-column>
-        <el-table-column label="Entregado a" prop="employee.name" />
-        <el-table-column label="Sucursal" prop="subsidiary.name" />
+        <el-table-column label="Sucursal origen" prop="origin.name" />
+        <el-table-column label="Sucursal destino" prop="target.name" />
         <el-table-column label="Fecha de creación">
           <template #default="{ row }">
             {{ dayjs(row.created_at).format('DD/MM/YYYY h:mm A') }}
@@ -59,7 +59,7 @@
     :paginate-elements-by-height="1400"
     :pdf-quality="2"
     :manual-pagination="false"
-    :filename="pdfName"
+    :filename="'responsiva-traslado'"
     pdf-format="letter"
     pdf-orientation="portrait"
     pdf-content-width="100%"
@@ -67,9 +67,10 @@
   >
     <template v-slot:pdf-content>
       <document-component
+        v-if="pdfParams"
         :user="pdfParams.user"
-        :employee="pdfParams.employee"
-        :subsidiary="pdfParams.subsidiary"
+        :origin="pdfParams.origin"
+        :target="pdfParams.target"
         :items="pdfParams.items"
       ></document-component>
     </template>
@@ -81,8 +82,9 @@ import Repository from '@/repositories/ResponsiveDocument'
 import { ElNotification, dayjs } from 'element-plus'
 import { useRouter } from 'vue-router'
 import Vue3Html2pdf from 'vue3-html2pdf'
-import DocumentComponent from '@/components/Docs/DocumentComponent.vue'
+import DocumentComponent from '@/components/Docs/TransferDocument.vue'
 import 'dayjs/locale/en'
+import Transfer from '@/repositories/Transfer'
 
 const isLoadingTable = ref(false)
 const filterParams = ref('')
@@ -91,7 +93,7 @@ const table = ref({
 })
 const router = useRouter()
 const html2Pdf = ref(null)
-const pdfParams = ref({})
+const pdfParams = ref(null)
 const pdfName = ref('responsiva')
 
 onMounted(async () => {
@@ -106,7 +108,7 @@ const renderTable = async (options) => {
 }
 
 const getAll = async (options) => {
-  const { data } = await Repository.all(options)
+  const { data } = await Transfer.all(options)
   return data
 }
 
@@ -131,17 +133,16 @@ const goToNewRoute = () => {
 const generatePdf = (responsiveDetails) => {
   const {
     generated_by: user,
-    employee,
-    subsidiary,
+    origin,
+    target,
     details: items,
   } = responsiveDetails
   pdfParams.value = {
     user,
-    employee,
-    subsidiary,
+    origin,
+    target,
     items,
   }
-  pdfName.value = `responsiva-${employee.name}`
   html2Pdf.value.generatePdf()
 }
 </script>
