@@ -1,7 +1,10 @@
 import { h, resolveComponent } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
+import store from '@/store'
 
 import DefaultLayout from '@/layouts/DefaultLayout'
+import TokenService from '@/services/TokenService'
+import Auth from '@/repositories/Auth'
 
 const routes = [
   {
@@ -129,7 +132,7 @@ const routes = [
       {
         path: 'login',
         name: 'Login',
-        component: () => import('@/views/pages/Login'),
+        component: () => import('@/views/pages/Login.vue'),
       },
       {
         path: 'register',
@@ -147,6 +150,22 @@ const router = createRouter({
     // always scroll to top
     return { top: 0 }
   },
+})
+
+router.beforeEach(async (to, from, next) => {
+  const isAuthenticated = store.state.token !== null
+  if (TokenService.hasToken()) {
+    store.dispatch('setToken', TokenService.getToken())
+    if (!store.getters.getUser) {
+      const { data: { data } } = await Auth.me()
+      store.dispatch('setUser', data)
+    }
+    return next()
+  }
+  if (to.name !== 'Login' && !isAuthenticated) {
+    return next({ name: 'Login' })
+  }
+  next()
 })
 
 export default router
