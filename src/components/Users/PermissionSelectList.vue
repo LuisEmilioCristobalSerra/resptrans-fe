@@ -25,7 +25,7 @@
             :label="item.name"
           />
         </el-select>
-        <span @click="saveItems(itemIds)" class="btn btn-outline-success col-1"
+        <span @click="saveItems(permissionIds)" class="btn btn-outline-success col-1"
           ><i class="fa-solid fa-floppy-disk"></i
         ></span>
       </div>
@@ -47,13 +47,17 @@
   </div>
 </template>
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, defineProps } from 'vue'
 import Subsidiary from '@/repositories/Subsidiary'
 import { ElNotification } from 'element-plus'
 import { useRoute } from 'vue-router'
 import Item from '@/repositories/Item'
 import Permission from '@/repositories/Permission'
 import User from '@/repositories/User'
+
+const props = defineProps({
+  userId: { type: Number, required: true },
+})
 
 const permissionIds = ref([])
 const select = ref({
@@ -73,7 +77,7 @@ onMounted(async () => {
 
 const renderTable = async (options) => {
   isLoadingTable.value = true
-  const permissions = await getUserPermissions(1, options)
+  const permissions = await getUserPermissions(props.userId, options)
   table.value.data = permissions
   isLoadingTable.value = false
 }
@@ -108,11 +112,13 @@ const searchItems = async (params) => {
   return data
 }
 
-const saveItems = async (itemIds) => {
+const saveItems = async (permissionIds) => {
   try {
-    await Subsidiary.addItemsToInventory(route.params.id, { item_ids: itemIds })
+    await User.assignPermissions(props.userId, {
+      permission_ids: permissionIds,
+    })
     renderTable()
-    success('Artículos registrados correctamente')
+    success('Permisos asignados correctamente')
   } catch (error) {
     console.log('error')
   }

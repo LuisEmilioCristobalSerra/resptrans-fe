@@ -34,4 +34,8 @@ const permissions = async (id, params) => {
     return BackendService.get(`${url}/${id}/permissions`, params)
 }
 
-export default { all, create, find, update, deleteModel, subsidiaries, createResponsive, permissions }
+const assignPermissions = async (id, params) => {
+    return BackendService.post(`${url}/${id}/permissions`, params)
+}
+
+export default { all, create, find, update, deleteModel, subsidiaries, createResponsive, permissions, assignPermissions }

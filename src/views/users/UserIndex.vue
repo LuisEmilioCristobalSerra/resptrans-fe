@@ -36,7 +36,9 @@
                   <el-dropdown-item @click="deleteModel(row.id)"
                     >Eliminar</el-dropdown-item
                   >
-                  <el-dropdown-item>Asignar permisos</el-dropdown-item>
+                  <el-dropdown-item @click="openPermissionModal(row)"
+                    >Asignar permisos</el-dropdown-item
+                  >
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -46,12 +48,27 @@
     </div>
   </div>
   <el-dialog
+    v-model="permissionModalIsVisible"
+    destroy-on-close
+    title="Información del empleado"
+    width="30%"
+  >
+    <permission-select-list :user-id="userSelected.id"></permission-select-list>
+  </el-dialog>
+  <el-dialog
     v-model="modalIsVisible"
     destroy-on-close
     title="Información del empleado"
     width="30%"
   >
-    <permission-select-list></permission-select-list>
+    <information-form
+      :data="model"
+      :store-mode="modalIsForStore"
+      :is-loading="formIsLoading"
+      @on-update="updateModel"
+      @on-create="createModel"
+      @cancel="modalIsVisible = false"
+    ></information-form>
   </el-dialog>
 </template>
 <script setup>
@@ -71,6 +88,8 @@ const filterParams = ref('')
 const table = ref({
   data: null,
 })
+const permissionModalIsVisible = ref(false)
+const userSelected = ref({})
 
 onMounted(async () => {
   await renderTable()
@@ -188,4 +207,9 @@ const displayedData = computed(() => {
     name.toLowerCase().includes(filterParams.value.toLowerCase()),
   )
 })
+
+const openPermissionModal = (user) => {
+  userSelected.value = user
+  permissionModalIsVisible.value = true
+}
 </script>
