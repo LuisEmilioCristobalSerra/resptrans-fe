@@ -7,8 +7,6 @@
         style="width: 100%"
       >
         <el-table-column label="Nombre" prop="name" />
-        <el-table-column label="Correo electrónico" prop="email" />
-        <el-table-column label="Creado el" prop="created_at" />
         <el-table-column align="right">
           <template #header>
             <div class="d-flex">
@@ -36,7 +34,6 @@
                   <el-dropdown-item @click="deleteModel(row.id)"
                     >Eliminar</el-dropdown-item
                   >
-                  <el-dropdown-item>Asignar permisos</el-dropdown-item>
                 </el-dropdown-menu>
               </template>
             </el-dropdown>
@@ -51,16 +48,22 @@
     title="Información del empleado"
     width="30%"
   >
-    <permission-select-list></permission-select-list>
+    <information-form
+      :data="model"
+      :store-mode="modalIsForStore"
+      :is-loading="formIsLoading"
+      @on-update="updateModel"
+      @on-create="createModel"
+      @cancel="modalIsVisible = false"
+    ></information-form>
   </el-dialog>
 </template>
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import BackendService from '@/services/BackendService'
-import Repository from '@/repositories/User'
-import InformationForm from '@/components/Users/InformationForm.vue'
+import Repository from '@/repositories/Permission'
+import InformationForm from '@/components/Permission/InformationForm.vue'
 import { ElNotification } from 'element-plus'
-import PermissionSelectList from '@/components/Users/PermissionSelectList.vue'
 
 const model = ref({})
 const isLoadingTable = ref(false)

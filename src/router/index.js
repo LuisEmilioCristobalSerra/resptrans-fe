@@ -99,6 +99,11 @@ const routes = [
         name: 'Usuarios',
         component: () => import('@/views/users/UserIndex.vue'),
       },
+      {
+        path: '/permissions',
+        name: 'Permisos',
+        component: () => import('@/views/permissions/PermissionIndex.vue'),
+      },
     ],
   },
   {

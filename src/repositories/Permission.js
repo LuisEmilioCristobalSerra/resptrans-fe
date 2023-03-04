@@ -1,6 +1,6 @@
 import BackendService from "@/services/BackendService"
 
-const url = "/users"
+const url = "/permissions"
 
 const all = async (params) => {
     return BackendService.get(url, { params })
@@ -30,8 +30,4 @@ const createResponsive = async (id, params) => {
     return BackendService.post(`${url}/${id}/responsives`, params)
 }
 
-const permissions = async (id, params) => {
-    return BackendService.get(`${url}/${id}/permissions`, params)
-}
-
-export default { all, create, find, update, deleteModel, subsidiaries, createResponsive, permissions }
+export default { all, create, find, update, deleteModel, subsidiaries, createResponsive }

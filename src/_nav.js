@@ -77,4 +77,16 @@ export default [
       },
     ],
   },
+  {
+    component: 'CNavGroup',
+    name: 'Permisos',
+    icon: 'fa-desktop',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'Reporte',
+        to: '/permissions',
+      },
+    ],
+  },
 ]
