@@ -65,4 +65,16 @@ export default [
       },
     ],
   },
+  {
+    component: 'CNavGroup',
+    name: 'Usuarios',
+    icon: 'fa-desktop',
+    items: [
+      {
+        component: 'CNavItem',
+        name: 'Reporte',
+        to: '/users',
+      },
+    ],
+  },
 ]

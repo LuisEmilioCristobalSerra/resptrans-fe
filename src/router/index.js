@@ -94,6 +94,11 @@ const routes = [
         name: 'Artículos',
         component: () => import('@/views/Item/ItemReport.vue'),
       },
+      {
+        path: '/users',
+        name: 'Usuarios',
+        component: () => import('@/views/users/UserIndex.vue'),
+      },
     ],
   },
   {
