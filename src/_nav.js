@@ -81,11 +81,13 @@ export default [
     component: 'CNavGroup',
     name: 'Permisos',
     icon: 'fa-desktop',
+    permission: 'users.show',
     items: [
       {
         component: 'CNavItem',
         name: 'Reporte',
         to: '/permissions',
+        permission: 'users.show',
       },
     ],
   },

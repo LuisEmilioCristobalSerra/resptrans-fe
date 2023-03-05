@@ -54,7 +54,13 @@ export default createStore({
   getters: {
     getUser(state) {
       return state.user;
-    }
+    },
+    can: (state, getters) => (permission) => {
+      return state.permissions.some(current => current.name === permission);
+    },
+    is: (state) => (role) => {
+      return state.roles.some(current => current.name === role);
+    },
   },
   modules: {},
 })

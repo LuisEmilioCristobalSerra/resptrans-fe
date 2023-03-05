@@ -9,6 +9,7 @@ import {
   CNavTitle,
 } from '@coreui/vue'
 import nav from '@/_nav.js'
+import { can, is } from '@/services/AuthService'
 
 const normalizePath = (path) =>
   decodeURI(path)
@@ -52,6 +53,11 @@ const AppSidebarNav = defineComponent({
   setup() {
     const route = useRoute()
     const firstRender = ref(true)
+    const renderItems = ref(nav.filter(navItem => {
+      if (is('super-admin')) return nav
+      if (navItem.items) navItem.items = navItem.items.filter(item => can(item.permission))
+      return can(navItem.permission);
+    }))
 
     onMounted(() => {
       firstRender.value = false
@@ -72,7 +78,10 @@ const AppSidebarNav = defineComponent({
               // h('i', { class: `` }),
               item.name,
             ],
-            default: () => item.items.map((child) => renderItem(child)),
+            default: () => item.items.filter(navItem => {
+              if (navItem.items) navItem.items = navItem.items.filter(item => can(item.permission))
+              return navItem;
+            }).map((child) => renderItem(child)),
           },
         )
       }
@@ -131,7 +140,7 @@ const AppSidebarNav = defineComponent({
         CSidebarNav,
         {},
         {
-          default: () => nav.map((item) => renderItem(item)),
+          default: () => renderItems.value.map((item) => renderItem(item)),
         },
       )
   },
