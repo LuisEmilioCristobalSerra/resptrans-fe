@@ -30,4 +30,8 @@ const createResponsive = async (id, params) => {
     return BackendService.post(`${url}/${id}/responsives`, params)
 }
 
-export default { all, create, find, update, deleteModel, subsidiaries, createResponsive }
+const roles = async (params) => {
+    return BackendService.get('roles', { params })
+}
+
+export default { all, create, find, update, deleteModel, subsidiaries, createResponsive, roles }

@@ -34,6 +34,25 @@
           <el-input v-model="formData.password" type="password" />
         </el-form-item>
       </div>
+      <div class="fv-row mb-7">
+        <label class="required fs-6 fw-semobold mb-2">Rol</label>
+        <el-form-item prop="rol_id">
+          <el-select
+            v-model="formData.rol_id"
+            class="w-100"
+            placeholder="Seleccione el rol del usuario"
+            filterable
+            :filter-method="filter"
+          >
+            <el-option
+              v-for="item in select.options"
+              :key="item.id"
+              :value="item.id"
+              :label="item.name"
+            />
+          </el-select>
+        </el-form-item>
+      </div>
     </div>
     <div class="modal-footer flex-center">
       <button @click="$emit('cancel')" type="button" class="btn btn-light me-3">
@@ -55,11 +74,17 @@ import {
   onMounted,
   computed,
 } from 'vue'
+import Permission from '@/repositories/Permission'
 
 const props = defineProps({
   data: Object,
   storeMode: Boolean,
   isLoading: Boolean,
+})
+
+const select = ref({
+  isLoading: false,
+  options: [],
 })
 
 const emit = defineEmits(['onUpdate', 'onCreate', 'cancel'])
@@ -76,14 +101,21 @@ const rules = ref({
   email: [
     {
       required: true,
-      message: 'El apellido paterno es requerido.',
+      message: 'El correo electrónico es requerido.',
       trigger: '-',
     },
   ],
   password: [
     {
       required: true,
-      message: 'El apellido materno es requerido.',
+      message: 'La contraseña es requerida.',
+      trigger: '-',
+    },
+  ],
+  rol_id: [
+    {
+      required: true,
+      message: 'El rol del usuario es requerido.',
       trigger: '-',
     },
   ],
@@ -105,5 +137,21 @@ const modelChanged = () => {
       emit(emitType, formData.value)
     }
   })
+}
+
+const filter = async (search) => {
+  if (search && search.length >= 3) {
+    select.value.isLoading = true
+    select.value.options = await getAll({
+      search,
+    })
+  }
+}
+
+const getAll = async (options) => {
+  const {
+    data: { data },
+  } = await Permission.roles(options)
+  return data
 }
 </script>
