@@ -1,14 +1,16 @@
 <template>
   <CFooter>
     <div>
-      <a href="https://coreui.io" target="_blank">CoreUI</a>
+      <span class="fw-bold">RESPTRANS</span>
       <span class="ms-1"
-        >&copy; {{ new Date().getFullYear() }} creativeLabs.</span
+        >&copy; {{ new Date().getFullYear() }} Prefabricados de Palenque.</span
       >
     </div>
     <div class="ms-auto">
-      <span class="me-1" target="_blank">Powered by</span>
-      <a href="https://coreui.io/vue">CoreUI for Vue</a>
+      <span class="me-1" target="_blank">Desarrollado con</span>
+      <a class="me-2" href="https://laravel.com">Laravel 10</a>
+      <span class="me-2"> & </span>
+      <a href="https://vuejs.org">Vue 3</a>
     </div>
   </CFooter>
 </template>

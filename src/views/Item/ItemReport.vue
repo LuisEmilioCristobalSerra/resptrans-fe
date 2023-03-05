@@ -1,6 +1,7 @@
 <template>
-  <div class="card">
+  <div class="card border-left-primary shadow">
     <div class="card-body">
+      <div class="card-title">Artículos registrados</div>
       <el-table
         v-loading="isLoadingTable"
         :data="displayedData"

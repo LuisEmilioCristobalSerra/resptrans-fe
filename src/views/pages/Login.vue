@@ -49,7 +49,7 @@
             <CCard class="text-white bg-primary py-5" style="width: 44%">
               <CCardBody class="text-center">
                 <div>
-                  <h2>Registrar</h2>
+                  <h2 class="mb-5">Registrar</h2>
                   <p>
                     Para acceder al sistemas es necesario contar con las
                     credenciales proporcionadas por su administrador. Consulte

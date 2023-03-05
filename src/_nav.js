@@ -44,7 +44,7 @@ export default [
   {
     component: 'CNavGroup',
     name: 'Responsivas',
-    icon: 'fa-desktop',
+    icon: 'fa-file-invoice',
     items: [
       {
         component: 'CNavItem',
@@ -56,7 +56,7 @@ export default [
   {
     component: 'CNavGroup',
     name: 'Transferencias',
-    icon: 'fa-desktop',
+    icon: 'fa-right-left',
     items: [
       {
         component: 'CNavItem',
@@ -68,7 +68,7 @@ export default [
   {
     component: 'CNavGroup',
     name: 'Usuarios',
-    icon: 'fa-desktop',
+    icon: 'fa-users',
     items: [
       {
         component: 'CNavItem',
@@ -80,7 +80,7 @@ export default [
   {
     component: 'CNavGroup',
     name: 'Permisos',
-    icon: 'fa-desktop',
+    icon: 'fa-check-double',
     permission: 'users.show',
     items: [
       {

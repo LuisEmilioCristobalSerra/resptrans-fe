@@ -12,16 +12,9 @@
     "
   >
     <CSidebarBrand>
-      <CIcon
-        custom-class-name="sidebar-brand-full"
-        :icon="logoNegative"
-        :height="35"
-      />
-      <CIcon
-        custom-class-name="sidebar-brand-narrow"
-        :icon="sygnet"
-        :height="35"
-      />
+      <div class="d-flex">
+        <img style="width: 75px" src="@/assets/images/fymsa-logo.svg" />
+      </div>
     </CSidebarBrand>
     <AppSidebarNav />
     <CSidebarToggler
@@ -35,7 +28,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { AppSidebarNav } from './AppSidebarNav'
-import { logoNegative } from '@/assets/brand/logo-negative'
+// import { logoNegative } from '@/assets/brand/logo-negative'
 import { sygnet } from '@/assets/brand/sygnet'
 export default {
   name: 'AppSidebar',
@@ -43,9 +36,10 @@ export default {
     AppSidebarNav,
   },
   setup() {
+    const icon = 'hola'
     const store = useStore()
     return {
-      logoNegative,
+      icon,
       sygnet,
       sidebarUnfoldable: computed(() => store.state.sidebarUnfoldable),
       sidebarVisible: computed(() => store.state.sidebarVisible),
