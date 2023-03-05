@@ -21,8 +21,9 @@ const startSpeechRecognition = () => {
   const recognition = new webkitSpeechRecognition()
   recognition.lang = 'es'
   recognition.onresult = (event) => {
-    speechText.value = event.results[0][0].transcript
-    emit('update:modelValue', speechText.value.replace('.', ''))
+    const results = event.results[0][0].transcript
+    speechText.value = results.replaceAll('.', '').toLowerCase()
+    emit('update:modelValue', speechText.value)
     emit('finished', speechText.value)
   }
   recognition.start()
