@@ -34,7 +34,11 @@ export default createStore({
     setRoles(state, roles) {
       state.roles = roles;
     },
-    setPermissions(state, permissions) {
+    setPermissions(state) {
+      let permissions = []
+      state.roles?.forEach(role => {
+        permissions.push(...role.permissions)
+      })
       state.permissions = permissions;
     },
   },

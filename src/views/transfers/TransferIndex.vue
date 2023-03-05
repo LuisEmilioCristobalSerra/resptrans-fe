@@ -25,7 +25,10 @@
         </el-table-column>
         <el-table-column align="right">
           <template #header>
-            <span @click="goToNewRoute" class="btn btn-outline-primary w-100"
+            <span
+              v-if="can('responsives.create')"
+              @click="goToNewRoute"
+              class="btn btn-outline-primary w-100"
               ><i class="fa-solid fa-plus pe-0 me-2"></i
               ><span>Nueva</span></span
             >
@@ -85,6 +88,7 @@ import Vue3Html2pdf from 'vue3-html2pdf'
 import DocumentComponent from '@/components/Docs/TransferDocument.vue'
 import 'dayjs/locale/en'
 import Transfer from '@/repositories/Transfer'
+import { can } from '@/services/AuthService'
 
 const isLoadingTable = ref(false)
 const filterParams = ref('')

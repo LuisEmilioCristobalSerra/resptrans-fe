@@ -45,11 +45,13 @@ export default [
     component: 'CNavGroup',
     name: 'Responsivas',
     icon: 'fa-file-invoice',
+    permission: 'responsives.index',
     items: [
       {
         component: 'CNavItem',
         name: 'Reporte',
         to: '/responsives',
+        permission: 'responsives.index',
       },
     ],
   },
@@ -57,11 +59,13 @@ export default [
     component: 'CNavGroup',
     name: 'Transferencias',
     icon: 'fa-right-left',
+    permission: 'transfers.index',
     items: [
       {
         component: 'CNavItem',
         name: 'Reporte',
         to: '/transfers',
+        permission: 'transfers.index',
       },
     ],
   },
