@@ -157,6 +157,7 @@ import { ElNotification } from 'element-plus'
 import Vue3Html2pdf from 'vue3-html2pdf'
 import DocumentComponent from '@/components/Docs/TransferDocument.vue'
 import ItemDetails from '@/components/Transfer/ItemDetails.vue'
+import store from '@/store'
 
 const html2Pdf = ref(null)
 const table = ref({
@@ -187,6 +188,7 @@ const target = ref({})
 const pdfParams = ref(null)
 const modalItemsIsVisible = ref(false)
 const itemSelected = ref({})
+const user = store.getters.getUser
 
 const filterOriginSubsidiaries = async (search) => {
   selects.value.subsidiariesOrigin.isLoading = true

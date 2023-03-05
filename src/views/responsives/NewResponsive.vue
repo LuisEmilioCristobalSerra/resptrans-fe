@@ -155,6 +155,7 @@ import { ElNotification } from 'element-plus'
 import Vue3Html2pdf from 'vue3-html2pdf'
 import DocumentComponent from '@/components/Docs/DocumentComponent.vue'
 import ItemDetails from '@/components/Responsive/ItemDetails.vue'
+import store from '@/store'
 
 const html2Pdf = ref(null)
 const table = ref({
@@ -186,6 +187,7 @@ const subsidiarySelected = ref({})
 const pdfParams = ref({})
 const modalItemsIsVisible = ref(false)
 const itemSelected = ref({})
+const user = store.getters.getUser
 
 const filterEmployees = async (search) => {
   selects.value.employeeSelect.isLoading = true
@@ -297,9 +299,7 @@ const success = (message) => {
 
 const generatePdf = () => {
   pdfParams.value = {
-    user: {
-      name: 'Juan Guillen Martinez',
-    },
+    user: user,
     employee: employeeSelected.value,
     subsidiary: subsidiarySelected.value,
     items: table.value.data.map((row) => {
