@@ -1,11 +1,11 @@
 <template>
-  <div class="d-flex">
+  <div class="d-flex w-100">
     <input
       class="form form-control me-1"
       v-model="speechText"
       @input="emit('update:modelValue', $event.target.value)"
     />
-    <button class="btn btn-primary" @click="startSpeechRecognition">
+    <button class="btn btn-primary" @click.prevent="startSpeechRecognition">
       <i class="fa-solid fa-microphone"></i>
     </button>
   </div>
@@ -22,7 +22,7 @@ const startSpeechRecognition = () => {
   recognition.lang = 'es'
   recognition.onresult = (event) => {
     speechText.value = event.results[0][0].transcript
-    emit('update:modelValue', speechText.value)
+    emit('update:modelValue', speechText.value.replace('.', ''))
     emit('finished', speechText.value)
   }
   recognition.start()

@@ -2,17 +2,17 @@
   <el-table v-loading="table.isLoading" :data="table.data" class="w-100 mb-3">
     <el-table-column label="Numero de serie">
       <template #default="{ row }">
-        <input class="form-control" v-model="row.serial" type="text" />
+        <speech-recognition-input v-model="row.serial" type="text" />
       </template>
     </el-table-column>
     <el-table-column label="Código de barras">
       <template #default="{ row }">
-        <input class="form-control" v-model="row.code" type="text" />
+        <speech-recognition-input v-model="row.code" type="text" />
       </template>
     </el-table-column>
     <el-table-column label="OC">
       <template #default="{ row }">
-        <input class="form-control" v-model="row.oc" type="text" />
+        <speech-recognition-input v-model="row.oc" type="text" />
       </template>
     </el-table-column>
     <el-table-column width="100" label="Acciones">
@@ -35,6 +35,7 @@
 </template>
 <script setup>
 import { ref, defineProps, onMounted } from 'vue'
+import SpeechRecognitionInput from '@/components/SpeechRecognitionInput.vue'
 
 const props = defineProps({
   quantity: Number,

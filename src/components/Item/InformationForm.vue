@@ -19,13 +19,13 @@
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Nombre</label>
         <el-form-item prop="name">
-          <el-input v-model="formData.name" type="text" />
+          <speech-recognition-input v-model="formData.name" type="text" />
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Descripción</label>
         <el-form-item prop="description">
-          <el-input v-model="formData.description" type="text" />
+          <speech-recognition-input v-model="formData.description" type="text" />
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
@@ -51,6 +51,7 @@
 
 <script setup>
 import { ref, watch, defineProps, onMounted } from 'vue'
+import SpeechRecognitionInput from '@/components/SpeechRecognitionInput.vue'
 
 const props = defineProps({
   data: Object,

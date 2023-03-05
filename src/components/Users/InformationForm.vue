@@ -19,13 +19,13 @@
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Nombre</label>
         <el-form-item prop="name">
-          <el-input v-model="formData.name" type="text" />
+          <speech-recognition-input v-model="formData.name" type="text" />
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Correo electrónico</label>
         <el-form-item prop="email">
-          <el-input v-model="formData.email" type="text" />
+          <speech-recognition-input v-model="formData.email" type="text" />
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
@@ -46,6 +46,7 @@
 
 <script setup>
 import Subsidiary from '@/repositories/Subsidiary'
+import SpeechRecognitionInput from '@/components/SpeechRecognitionInput.vue'
 import {
   defineComponent,
   ref,

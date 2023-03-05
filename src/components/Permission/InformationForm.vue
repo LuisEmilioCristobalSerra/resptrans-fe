@@ -19,13 +19,13 @@
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Aplica en</label>
         <el-form-item prop="applied_in">
-          <el-input v-model="formData.applied_in" type="text" />
+          <speech-recognition-input v-model="formData.applied_in" type="text" />
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Acción</label>
         <el-form-item prop="action">
-          <el-input v-model="formData.action" type="text" />
+          <speech-recognition-input v-model="formData.action" type="text" />
         </el-form-item>
       </div>
     </div>
@@ -40,6 +40,7 @@
 
 <script setup>
 import Subsidiary from '@/repositories/Subsidiary'
+import SpeechRecognitionInput from '@/components/SpeechRecognitionInput.vue'
 import {
   defineComponent,
   ref,

@@ -19,31 +19,41 @@
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Nombre</label>
         <el-form-item prop="name">
-          <el-input v-model="formData.name" type="text" />
+          <speech-recognition-input
+            v-model="formData.name"
+          ></speech-recognition-input>
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Apellido paterno</label>
         <el-form-item prop="paternal_surname">
-          <el-input v-model="formData.paternal_surname" type="text" />
+          <speech-recognition-input
+            v-model="formData.paternal_surname"
+          ></speech-recognition-input>
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Apellido materno</label>
         <el-form-item prop="maternal_surname">
-          <el-input v-model="formData.maternal_surname" type="text" />
+          <speech-recognition-input
+            v-model="formData.maternal_surname"
+          ></speech-recognition-input>
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Correo electrónico</label>
         <el-form-item prop="email">
-          <el-input v-model="formData.email" type="text" />
+          <speech-recognition-input
+            v-model="formData.email"
+          ></speech-recognition-input>
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Teléfono</label>
         <el-form-item prop="phone">
-          <el-input v-model="formData.phone" type="text" />
+          <speech-recognition-input
+            v-model="formData.phone"
+          ></speech-recognition-input>
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
@@ -76,6 +86,7 @@
 
 <script setup>
 import Subsidiary from '@/repositories/Subsidiary'
+import SpeechRecognitionInput from '@/components/SpeechRecognitionInput.vue'
 import {
   defineComponent,
   ref,

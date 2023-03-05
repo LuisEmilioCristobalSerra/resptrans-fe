@@ -16,37 +16,37 @@
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Nombre</label>
         <el-form-item prop="name">
-          <el-input v-model="formData.name" type="text" />
+          <speech-recognition-input v-model="formData.name" type="text" />
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Calle</label>
         <el-form-item prop="street">
-          <el-input v-model="formData.street" type="text" />
+          <speech-recognition-input v-model="formData.street" type="text" />
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Numero interior</label>
         <el-form-item prop="interior">
-          <el-input v-model="formData.interior" type="text" />
+          <speech-recognition-input v-model="formData.interior" type="text" />
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Numero exterior</label>
         <el-form-item prop="exterior">
-          <el-input v-model="formData.exterior" type="text" />
+          <speech-recognition-input v-model="formData.exterior" type="text" />
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Ciudad</label>
         <el-form-item prop="district">
-          <el-input v-model="formData.district" type="text" />
+          <speech-recognition-input v-model="formData.district" type="text" />
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Código postal</label>
         <el-form-item prop="postal_code">
-          <el-input v-model="formData.postal_code" type="text" />
+          <speech-recognition-input v-model="formData.postal_code" type="text" />
         </el-form-item>
       </div>
     </div>
@@ -61,6 +61,7 @@
 
 <script setup>
 import { ref, watch, defineProps, onMounted } from 'vue'
+import SpeechRecognitionInput from '@/components/SpeechRecognitionInput.vue'
 
 const props = defineProps({
   data: Object,
