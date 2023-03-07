@@ -1,7 +1,7 @@
 <template>
   <div class="card border-left-primary shadow mb-5">
     <div class="card-body">
-      <div class="w-100 card-title">Transferencias</div>
+      <div class="w-100 card-title">Traslados</div>
       <el-table
         v-loading="isLoadingTable"
         :data="displayedData"

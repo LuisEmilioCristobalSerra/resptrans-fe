@@ -15,7 +15,7 @@
           <CNavLink href="#/users">Usuarios</CNavLink>
         </CNavItem>
         <CNavItem>
-          <CNavLink href="#/transfers/new">Nuevo traspaso</CNavLink>
+          <CNavLink href="#/transfers/new">Nuevo traslado</CNavLink>
         </CNavItem>
         <CNavItem>
           <CNavLink href="#/responsives/new">Nueva responsiva</CNavLink>

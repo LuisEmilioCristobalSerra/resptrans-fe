@@ -57,7 +57,7 @@ export default [
   },
   {
     component: 'CNavGroup',
-    name: 'Transferencias',
+    name: 'Traslados',
     icon: 'fa-right-left',
     permission: 'transfers.index',
     items: [
