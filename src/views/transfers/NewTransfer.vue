@@ -15,17 +15,18 @@
   >
     <template v-slot:pdf-content>
       <document-component
-        v-if="pdfParams"
+        v-if="showPdfComponent"
         :user="pdfParams.user"
         :origin="pdfParams.origin"
         :target="pdfParams.target"
         :items="pdfParams.items"
+        :employee="pdfParams.employee"
       ></document-component>
     </template>
   </vue3-html2pdf>
   <div class="card mb-2 border-left-primary shadow">
     <div class="card-body">
-      <div class="w-100 card-title">Información del empleado</div>
+      <div class="w-100 card-title">Información</div>
       <div class="row">
         <el-select
           v-model="transferDetails.origin_id"
@@ -36,10 +37,7 @@
           remote
           :loading="selects.subsidiariesOrigin.isLoading"
           :remote-method="filterOriginSubsidiaries"
-          @change="
-            filterItems($event);
-            setOriginSubsidiary($event)
-          "
+          @change="changeTransfer"
         >
           <el-option
             v-for="item in selects.subsidiariesOrigin.options"
@@ -67,6 +65,23 @@
           />
         </el-select>
       </div>
+      <el-select
+        v-model="transferDetails.employee_id"
+        class="w-100 mt-2"
+        placeholder="Seleccione el empleado"
+        size="large"
+        filterable
+        remote
+        :remote-method="filterEmployees"
+      >
+        <el-option
+          v-for="item in selects.employeeSelect.options"
+          :key="item.id"
+          :label="`${item.name} ${item.paternal_surname} ${item.maternal_surname}`"
+          :value="item.id"
+          @click="employeeSelected = item"
+        />
+      </el-select>
     </div>
   </div>
   <div class="card border-left-success shadow">
@@ -158,6 +173,8 @@ import Vue3Html2pdf from 'vue3-html2pdf'
 import DocumentComponent from '@/components/Docs/TransferDocument.vue'
 import ItemDetails from '@/components/Transfer/ItemDetails.vue'
 import store from '@/store'
+import Employee from '@/repositories/Employee'
+import router from '@/router'
 
 const html2Pdf = ref(null)
 const table = ref({
@@ -167,6 +184,7 @@ const table = ref({
 const transferDetails = ref({
   origin_id: null,
   target_id: null,
+  employee_id: null,
   items: [],
 })
 const selects = ref({
@@ -182,6 +200,10 @@ const selects = ref({
     options: [],
     isLoading: false,
   },
+  employeeSelect: {
+    options: [],
+    isLoading: false,
+  },
 })
 const origin = ref({})
 const target = ref({})
@@ -189,6 +211,8 @@ const pdfParams = ref(null)
 const modalItemsIsVisible = ref(false)
 const itemSelected = ref({})
 const user = store.getters.getUser
+const employeeSelected = ref({})
+const showPdfComponent = ref(false)
 
 const filterOriginSubsidiaries = async (search) => {
   selects.value.subsidiariesOrigin.isLoading = true
@@ -262,6 +286,7 @@ const createTransfer = async () => {
   const params = {
     origin_id: transferDetails.value.origin_id,
     target_id: transferDetails.value.target_id,
+    employee_id: transferDetails.value.employee_id,
     details: data.map((item) => {
       return {
         quantity: item.quantity,
@@ -272,8 +297,6 @@ const createTransfer = async () => {
   }
   await Transfer.create(params)
   generatePdf()
-  resetFields()
-  success('Traslado generado correctamente')
 }
 
 const success = (message) => {
@@ -285,11 +308,10 @@ const success = (message) => {
 
 const generatePdf = () => {
   pdfParams.value = {
-    user: {
-      name: 'Juan Guillen Martinez',
-    },
+    user: { name: 'Juan' },
     origin: origin.value,
     target: target.value,
+    employee: employeeSelected.value,
     items: table.value.data.map((row) => {
       return {
         ...row.item,
@@ -299,7 +321,9 @@ const generatePdf = () => {
     }),
   }
   console.log({ pdf: pdfParams.value })
+  showPdfComponent.value = true
   html2Pdf.value.generatePdf()
+  resetFields()
 }
 
 const resetFields = () => {
@@ -310,6 +334,8 @@ const resetFields = () => {
   transferDetails.value = {
     origin_id: null,
     target_id: null,
+    target_id: null,
+    employee_id: null,
     items: [],
   }
   selects.value = {
@@ -322,6 +348,10 @@ const resetFields = () => {
       isLoading: false,
     },
     items: {
+      options: [],
+      isLoading: false,
+    },
+    employeeSelect: {
       options: [],
       isLoading: false,
     },
@@ -348,5 +378,23 @@ const setTargetSubsidiary = (id) => {
   target.value = selects.value.subsidiariesTarget.options.find(
     (subsidiary) => subsidiary.id === id,
   )
+}
+
+const filterEmployees = async (search) => {
+  selects.value.employeeSelect.isLoading = true
+  selects.value.employeeSelect.options = await searchEmployees({ search })
+  selects.value.employeeSelect.isLoading = false
+}
+
+const searchEmployees = async (params) => {
+  const {
+    data: { data },
+  } = await Employee.all(params)
+  return data
+}
+
+const changeTransfer = async (search) => {
+  await filterItems(search)
+  setOriginSubsidiary(search)
 }
 </script>

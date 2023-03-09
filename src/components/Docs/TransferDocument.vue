@@ -10,7 +10,7 @@
         <h5 class="fw-bold">Responsiva de traslado</h5>
       </div>
       <div class="mb-3">
-        <h7 class="fw-bold">Gerencia de proyectos</h7>
+        <h6 class="fw-bold">Gerencia de proyectos</h6>
       </div>
       <div>
         <span
@@ -37,14 +37,23 @@
           Dichos equipos pertenecen a la empresa FYMSA, Prefabricados de
           Palenque S.A. de C.V., para su traslado de la sucursal
           <span class="fw-bold">{{ origin.name }}</span> a la sucursal
-          <span class="fw-bold">{{ target.name }}</span
+          <span class="fw-bold">{{ target.name }}</span> y se entregan a Nombre
+          del empleado
+          <span class="fw-bold">{{
+            `${props.employee?.name} ${props.employee?.paternal_surname} ${props.employee?.maternal_surname}`
+          }}</span
           >. Sin más por el momento, quedo a sus órdenes.
         </div>
         <div class="mt-5 pt-5 text-center">
           <div class="fw-bold">
             ________________________________________________________
           </div>
-          <div class="fw-bold">Nombre y firma de recepción para traslado .</div>
+          <p class="fw-bold">
+            {{
+              `${props.employee?.name} ${props.employee?.paternal_surname} ${props.employee?.maternal_surname}`
+            }}
+          </p>
+          <div class="fw-bold">Nombre y firma de recepción para traslado.</div>
         </div>
       </div>
     </main>
@@ -55,6 +64,7 @@
 import { dayjs } from 'element-plus'
 const props = defineProps({
   user: Object,
+  employee: Object,
   origin: Object,
   target: Object,
   items: Array,

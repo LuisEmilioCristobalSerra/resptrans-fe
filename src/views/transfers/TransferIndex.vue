@@ -9,6 +9,11 @@
       >
         <el-table-column label="Folio" prop="id" />
         <el-table-column label="Generado por" prop="generated_by.name" />
+        <el-table-column label="Asignado a">
+          <template #default="{ row }">
+            <span>{{ row.employee?.name || 'Desconocido' }}</span>
+          </template>
+        </el-table-column>
         <el-table-column label="Artículos">
           <template #default="{ row }">
             <el-tag v-for="item in row.details" :key="item.id">{{
@@ -146,6 +151,7 @@ const generatePdf = (responsiveDetails) => {
     origin,
     target,
     items,
+    employee: responsiveDetails.employee,
   }
   html2Pdf.value.generatePdf()
 }
