@@ -73,11 +73,13 @@ export default [
     component: 'CNavGroup',
     name: 'Usuarios',
     icon: 'fa-users',
+    permission: 'users.show',
     items: [
       {
         component: 'CNavItem',
         name: 'Reporte',
         to: '/users',
+        permission: 'users.show',
       },
     ],
   },
@@ -85,13 +87,13 @@ export default [
     component: 'CNavGroup',
     name: 'Permisos',
     icon: 'fa-check-double',
-    permission: 'users.show',
+    permission: 'users.permissions',
     items: [
       {
         component: 'CNavItem',
         name: 'Reporte',
         to: '/permissions',
-        permission: 'users.show',
+        permission: 'users.permissions',
       },
     ],
   },

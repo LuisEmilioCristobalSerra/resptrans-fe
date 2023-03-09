@@ -34,11 +34,12 @@ export default createStore({
     setRoles(state, roles) {
       state.roles = roles;
     },
-    setPermissions(state) {
+    setPermissions(state, permissionsLoaded) {
       let permissions = []
       state.roles?.forEach(role => {
         permissions.push(...role.permissions)
       })
+      permissions.push(...permissionsLoaded)
       state.permissions = permissions;
     },
   },
@@ -60,6 +61,7 @@ export default createStore({
       return state.user;
     },
     can: (state, getters) => (permission) => {
+      if (state.roles.some(role => role.name === 'super-admin')) return true
       return state.permissions.some(current => current.name === permission);
     },
     is: (state) => (role) => {

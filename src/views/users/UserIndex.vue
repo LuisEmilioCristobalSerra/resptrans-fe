@@ -19,7 +19,7 @@
                 class="form-control me-1"
                 placeholder="Buscar"
               />
-              <span @click="openCreateForm" class="btn btn-outline-primary"
+              <span v-if="can('users.create')" @click="openCreateForm" class="btn btn-outline-primary"
                 ><i class="fa-solid fa-plus pe-0"></i
               ></span>
             </div>
@@ -34,10 +34,14 @@
               ></el-button>
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item @click="deleteModel(row.id)"
+                  <el-dropdown-item
+                    v-if="can('users.delete')"
+                    @click="deleteModel(row.id)"
                     >Eliminar</el-dropdown-item
                   >
-                  <el-dropdown-item @click="openPermissionModal(row)"
+                  <el-dropdown-item
+                    v-if="can('users.permissions')"
+                    @click="openPermissionModal(row)"
                     >Asignar permisos</el-dropdown-item
                   >
                 </el-dropdown-menu>
@@ -79,6 +83,7 @@ import Repository from '@/repositories/User'
 import InformationForm from '@/components/Users/InformationForm.vue'
 import { ElNotification } from 'element-plus'
 import PermissionSelectList from '@/components/Users/PermissionSelectList.vue'
+import { can } from '@/services/AuthService'
 
 const model = ref({})
 const isLoadingTable = ref(false)
