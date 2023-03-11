@@ -88,7 +88,7 @@ const login = async () => {
     })
     store.dispatch('setToken', token)
     store.dispatch('setUser', user)
-    router.push({ name: 'Dashboard' })
+    router.push("/dashboard")
   } catch (error) {
     console.log(error)
   }
