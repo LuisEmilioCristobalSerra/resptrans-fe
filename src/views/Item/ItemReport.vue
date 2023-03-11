@@ -37,7 +37,7 @@
                   <el-dropdown-item @click="openInformation(row.id)"
                     >Editar</el-dropdown-item
                   >
-                  <el-dropdown-item @click="deleteModel(row.id)"
+                  <el-dropdown-item v-if="can('items.delete')" @click="deleteModel(row.id)"
                     >Eliminar</el-dropdown-item
                   >
                 </el-dropdown-menu>
