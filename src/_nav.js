@@ -35,11 +35,13 @@ export default [
     component: 'CNavGroup',
     name: 'Artículos',
     icon: 'fa-desktop',
+    permission: 'items.index',
     items: [
       {
         component: 'CNavItem',
         name: 'Reporte',
         to: '/items',
+        permission: 'items.index',
       },
     ],
   },
