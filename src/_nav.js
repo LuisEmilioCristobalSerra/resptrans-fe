@@ -9,11 +9,13 @@ export default [
     component: 'CNavGroup',
     name: 'Empleados',
     icon: 'fa-people-line',
+    permission: 'employees.index',
     items: [
       {
         component: 'CNavItem',
         name: 'Reporte',
         to: '/employees',
+        permission: 'employees.index',
       },
     ],
   },
