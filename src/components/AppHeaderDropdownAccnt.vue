@@ -18,7 +18,7 @@
       </CDropdownItem>
       <CDropdownItem style="cursor: pointer">
         <span class="me-2"><i class="fa-solid fa-briefcase"></i></span>
-        {{ user.workshop || 'Empleado' }}
+        {{ user.job_title || 'Empleado' }}
       </CDropdownItem>
       <CDropdownItem style="cursor: pointer">
         <span class="me-2"><i class="fa-solid fa-at"></i></span>

@@ -25,7 +25,11 @@
       <div class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Correo electrónico</label>
         <el-form-item prop="email">
-          <speech-recognition-input v-model="formData.email" type="text" />
+          <speech-recognition-input
+            :disabled="!props.storeMode"
+            v-model="formData.email"
+            type="text"
+          />
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
@@ -35,6 +39,12 @@
         </el-form-item>
       </div>
       <div class="fv-row mb-7">
+        <label class="required fs-6 fw-semobold mb-2">Puesto de trabajo</label>
+        <el-form-item prop="name">
+          <speech-recognition-input v-model="formData.job_title" type="text" />
+        </el-form-item>
+      </div>
+      <div v-if="props.storeMode" class="fv-row mb-7">
         <label class="required fs-6 fw-semobold mb-2">Rol</label>
         <el-form-item prop="rol_id">
           <el-select
@@ -64,16 +74,8 @@
 </template>
 
 <script setup>
-import Subsidiary from '@/repositories/Subsidiary'
 import SpeechRecognitionInput from '@/components/SpeechRecognitionInput.vue'
-import {
-  defineComponent,
-  ref,
-  watch,
-  defineProps,
-  onMounted,
-  computed,
-} from 'vue'
+import { ref, defineProps, onMounted } from 'vue'
 import Permission from '@/repositories/Permission'
 
 const props = defineProps({
@@ -112,17 +114,22 @@ const rules = ref({
       trigger: '-',
     },
   ],
-  rol_id: [
+  job_title: [
     {
       required: true,
+      message: 'El puesto de trabajo es requerido.',
+      trigger: '-',
+    },
+  ],
+  rol_id: [
+    {
+      required: false,
       message: 'El rol del usuario es requerido.',
       trigger: '-',
     },
   ],
 })
-const disabled = ref(false)
 const isLoading = ref(false)
-const subsidiaries = ref([])
 
 onMounted(async () => {
   isLoading.value = true

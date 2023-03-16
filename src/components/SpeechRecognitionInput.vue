@@ -3,18 +3,34 @@
     <input
       class="form form-control me-1"
       v-model="speechText"
+      :disabled="props.disabled"
       @input="emit('update:modelValue', $event.target.value)"
     />
-    <button class="btn btn-primary" @click.prevent="startSpeechRecognition">
+    <button
+      class="btn btn-primary"
+      :disabled="props.disabled"
+      @click.prevent="startSpeechRecognition"
+    >
       <i class="fa-solid fa-microphone"></i>
     </button>
   </div>
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue'
+import { ref, defineEmits, watch } from 'vue'
 
-const speechText = ref('')
+const props = defineProps({
+  modelValue: {
+    type: String,
+    default: '',
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
+  },
+})
+
+const speechText = ref(props.modelValue)
 const emit = defineEmits(['update:modelValue', 'finished'])
 
 const startSpeechRecognition = () => {
@@ -28,4 +44,11 @@ const startSpeechRecognition = () => {
   }
   recognition.start()
 }
+
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    speechText.value = newValue
+  },
+)
 </script>

@@ -19,7 +19,10 @@
                 class="form-control me-1"
                 placeholder="Buscar"
               />
-              <span v-if="can('users.create')" @click="openCreateForm" class="btn btn-outline-primary"
+              <span
+                v-if="can('users.create')"
+                @click="openCreateForm"
+                class="btn btn-outline-primary"
                 ><i class="fa-solid fa-plus pe-0"></i
               ></span>
             </div>
@@ -34,6 +37,11 @@
               ></el-button>
               <template #dropdown>
                 <el-dropdown-menu>
+                  <el-dropdown-item
+                    v-if="can('users.update')"
+                    @click="openInformation(row.id)"
+                    >Actualizar</el-dropdown-item
+                  >
                   <el-dropdown-item
                     v-if="can('users.delete')"
                     @click="deleteModel(row.id)"
@@ -141,10 +149,7 @@ const openInformation = async (rowId) => {
   modalIsForStore.value = false
   formIsLoading.value = true
   const response = await getInformation(rowId)
-  model.value = {
-    ...response,
-    subsidiary_ids: response.subsidiaries?.map((subsidiary) => subsidiary.id),
-  }
+  model.value = response
   formIsLoading.value = false
   modalIsVisible.value = true
   isLoadingTable.value = false
